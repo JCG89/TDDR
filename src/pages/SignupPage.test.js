@@ -15,20 +15,34 @@ describe('Sign Up Page', () => {
         const header = screen.queryByRole("heading", {name:"Sign Up"});
        expect(header).toBeInTheDocument();
     });
-    it("has username input", () => {
+    it("has username label", () => {
 
         render(<SignupPage/>);
 
-        const input = screen.getByPlaceholderText('username');
-        expect(input).toBeInTheDocument()
+        const label = screen.getByLabelText('Username');
+        expect(label).toBeInTheDocument()
     });
 
-    it('has email input', () => {
+    it('has email label', () => {
        render(<SignupPage/>);
 
-        const input = screen.getByPlaceholderText('email');
-        expect(input).toBeInTheDocument();
-    })
+        const label = screen.getByLabelText('Email');
+        expect(label).toBeInTheDocument();
+    });
+     it("has passwords label", () => {
+        render(<SignupPage/>);
+        const label = screen.getByLabelText('Password');
+
+        expect(label).toBeInTheDocument();
+     });
+
+     it("has passwords type",()=>{
+
+        render(<SignupPage/>);
+        const type = screen.getByLabelText('Password');
+
+        expect(type.type).toBe('password');
+     })
     })
 
     
