@@ -42,6 +42,19 @@ describe('Sign Up Page', () => {
         const type = screen.getByLabelText('Password');
 
         expect(type.type).toBe('password');
+     });
+     it('has passwords type for password repeat',()=>{
+
+        render(<SignupPage/>);
+
+        const repeat = screen.getByLabelText('Password Repeat');
+
+        expect(repeat.type).toBe('password');
+     });
+     it("has Sgn Up Button",()=>{
+        render(<SignupPage/>);
+        const button  = screen.queryByRole('button', {name: "Sign Up"});
+        expect(button).toBeInTheDocument();
      })
     })
 

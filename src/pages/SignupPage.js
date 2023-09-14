@@ -10,6 +10,9 @@ const SignupPage = ()=>{
          <input id="Email"/>
          <label htmlFor="Password">Password</label>
          <input id = "Password" type="password"/>
+         <label htmlFor="Password Repeat">Password Repeat</label>
+         <input id = "Password Repeat" type="password"/>
+         <button id="Sign Up">Sign Up</button>
        </div>
        
     )
