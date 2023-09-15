@@ -4,6 +4,7 @@
 import SignupPage from './SignupPage';
 
 import {render, screen} from '@testing-library/react'
+import {userEvent} from '@testing-library/user-event'
 
 
 describe('Sign Up Page', () => {
@@ -39,25 +40,45 @@ describe('Sign Up Page', () => {
      it("has passwords type",()=>{
 
         render(<SignupPage/>);
-        const type = screen.getByLabelText('Password');
+        const passwordInput = screen.getByLabelText('Password');
 
-        expect(type.type).toBe('password');
+        expect(passwordInput.type).toBe('password');
      });
      it('has passwords type for password repeat',()=>{
 
         render(<SignupPage/>);
 
-        const repeat = screen.getByLabelText('Password Repeat');
+        const repeatPasswordInput = screen.getByLabelText('Password Repeat');
 
-        expect(repeat.type).toBe('password');
+        expect(repeatPasswordInput.type).toBe('password');
      });
      it("has Sgn Up Button",()=>{
         render(<SignupPage/>);
         const button  = screen.queryByRole('button', {name: "Sign Up"});
         expect(button).toBeInTheDocument();
+     });
+     it('has desabled btton', () => {
+        render(<SignupPage/>);
+
+        const button= screen.queryByRole('button', {name:'Sign Up'});
+
+        expect(button).toBeDisabled();
      })
     })
 
-    
+    describe('Interactions', () => {
+        it('enables button when the password and the repeat password have the same value', () => {
+          render(<SignupPage />);
+          const passwordInput = screen.getByLabelText('Password');
+          const repeatPasswordInput = screen.getByLabelText('Password Repeat');
+          userEvent?.type(passwordInput, 'P4ssword');
+          userEvent?.type(repeatPasswordInput, 'P4ssword'); 
+      
+          const button = screen.queryByRole('button', { name:'Sign Up'});
+      
+          expect(button).not.toBeEnabled();
+        });
+      });
+      
     
 })
